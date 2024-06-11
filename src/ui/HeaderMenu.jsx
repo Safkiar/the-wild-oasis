@@ -10,13 +10,18 @@ const StyledHeaderMenu = styled.ul`
   gap: 0.4rem;
 `;
 
-function HeaderMenu() {
+function HeaderMenu({ disableMenu }) {
   const navigate = useNavigate();
 
   return (
     <StyledHeaderMenu>
       <li>
-        <ButtonIcon onClick={() => navigate("/account")}>
+        <ButtonIcon
+          onClick={() => {
+            navigate("/account");
+            disableMenu();
+          }}
+        >
           <HiOutlineUser />
         </ButtonIcon>
       </li>

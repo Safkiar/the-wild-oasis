@@ -11,6 +11,15 @@ const LoginLayout = styled.main`
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
+  h2 {
+    text-align: center;
+  }
+  @media (max-width: 505px) {
+    form {
+      width: 90vw;
+      margin: 0 auto;
+    }
+  }
 `;
 
 function Login() {
@@ -18,6 +27,8 @@ function Login() {
     <LoginLayout>
       <Logo />
       <Heading as="h4">Log in to your account</Heading>
+      <Heading as="h2">Login: user@example.com</Heading>
+      <Heading as="h2">Password: user@example.com</Heading>
       <LoginForm />
     </LoginLayout>
   );

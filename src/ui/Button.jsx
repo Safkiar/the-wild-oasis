@@ -62,4 +62,6 @@ Button.defaultProps = {
   size: "medium",
 };
 
-export default Button;
+export default ({ onClick, ...props }) => (
+  <Button {...props} onClick={onClick} />
+);

@@ -11,13 +11,22 @@ const StyledSidebar = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+
+  @media (max-width: 1125px) {
+    display: ${(props) => (props.showSideBar ? "flex" : "none")};
+    position: ${(props) => (props.showSideBar ? "fixed" : "relative")};
+    z-index: 1000;
+    height: 100%;
+    width: 100vw;
+    margin-top: 50px;
+  }
 `;
 
-function Sidebar() {
+function Sidebar({ showSideBar, disableMenu }) {
   return (
-    <StyledSidebar>
+    <StyledSidebar showSideBar={showSideBar}>
       <Logo />
-      <MainNav />
+      <MainNav disableMenu={disableMenu} />
     </StyledSidebar>
   );
 }
