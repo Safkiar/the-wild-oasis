@@ -46,7 +46,6 @@ const Container = styled.div`
 function AppLayout() {
   const [menuActivation, setMenuActivation] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
-  const [isOverflowHidden, setIsOverflowHidden] = useState(false);
 
   const showMenu = () => {
     setShowSideBar((prevState) => !prevState);
