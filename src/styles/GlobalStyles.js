@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 :root {
+  /* The :root pseudo-class targets the highest-level element in the document tree */
   &, &.light-mode {
   /* Grey */
   --color-grey-0: #fff;

@@ -26,7 +26,9 @@ const StyledDashboardLayout = styled.div`
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoading1 } = useRecentBookings();
+  //  recent booking data based on a date calculated from URL query parameters, utilizing react-query for data fetching and caching.
   const { confirmedStays, isLoading: isLoading2, numDays } = useRecentStays();
+  //  from URL query parameters, filters the stays to include only those with a "checked-in" or "checked-out" status
   const { cabins, isLoading: isLoading3 } = useCabins();
 
   if (isLoading1 || isLoading2 || isLoading3) return <Spinner />;

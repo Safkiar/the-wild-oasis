@@ -81,6 +81,7 @@ function AppLayout() {
       <Main>
         <Container>
           <Outlet />
+          {/* used in the parent route component to indicate where the child route components should be rendered. */}
         </Container>
       </Main>
     </StyledAppLayout>

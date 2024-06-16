@@ -23,6 +23,7 @@ const queryClient = new QueryClient({
     queries: {
       // staleTime: 60 * 1000,
       staleTime: 0,
+      // The data is considered stale immediately after being fetched, which causes it to be refetched every time it is accessed.
     },
   },
 });
@@ -35,15 +36,22 @@ function App() {
 
         <GlobalStyles />
         <BrowserRouter>
+          {/*HTML5 history API (pushState, replaceState, and the popstate event) to keep  UI in sync with the URL. When the URL changes, <BrowserRouter> ensures that the correct React component is rendered based on the current URL. */}
           <Routes>
+            {/* allows  to declare different routes and their corresponding components or pages. */}
             <Route
+              // defining individual routes within a React application
+              // This route does not have a path attribute, making it a wrapper route that applies to all nested routes.
               element={
+                // element (or component) that should be rendered when the route's path matches the current URL
                 <ProtectedRoute>
+                  {/* if user is authenthicated - show the app */}
                   <AppLayout />
                 </ProtectedRoute>
               }
             >
               <Route index element={<Navigate replace to="dashboard" />} />
+              {/* replace means  user cannot go back to the previous page using the back button in their browser. */}
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:bookingId" element={<Booking />} />

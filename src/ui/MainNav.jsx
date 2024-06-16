@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+// similar to the Link component, but with added functionality for styling the active link based on the current route
 import styled from "styled-components";
 import {
   HiOutlineCalendarDays,

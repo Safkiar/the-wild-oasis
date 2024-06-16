@@ -2,12 +2,16 @@ import { createContext, useContext, useEffect } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
 const DarkModeContext = createContext();
+// I CREATE A CONTEXT OBJECT WHICH WILL SHARE DATA ACROSS THE ENTIRE COMPONENT TREE
 
 function DarkModeProvider({ children }) {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
     "isDarkMode"
   );
+
+  // checks isDarkMode on
+  // isDarkMode - key
 
   useEffect(
     function () {
@@ -34,6 +38,7 @@ function DarkModeProvider({ children }) {
 }
 
 function useDarkMode() {
+  // This function is exported
   const context = useContext(DarkModeContext);
   if (context === undefined)
     throw new Error("DarkModeContext was used outside of DarkModeProvider");

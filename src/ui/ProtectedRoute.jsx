@@ -14,28 +14,29 @@ const FullPage = styled.div`
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
+  // avigate to different routes within a React application
 
-  // 1. Load the authenticated user
   const { isLoading, isAuthenticated } = useUser();
+  // 1. Load the authenticated user
 
-  // 2. If there is NO authenticated user, redirect to the /login
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) navigate("/login");
     },
     [isAuthenticated, isLoading, navigate]
   );
+  // 2. If there is NO authenticated user, redirect to the /login
 
-  // 3. While loading, show a spinner
   if (isLoading)
     return (
       <FullPage>
         <Spinner />
       </FullPage>
     );
+  // 3. While loading, show a spinner
 
-  // 4. If there IS a user, render the app
   if (isAuthenticated) return children;
+  // 4. If there IS a user, render the app
 }
 
 export default ProtectedRoute;

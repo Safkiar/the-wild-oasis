@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
+import { useEffect, useState } from "react";
 
 const ChartBox = styled.div`
   /* Box */
@@ -16,15 +17,28 @@ const ChartBox = styled.div`
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
-  padding: 2.4rem 3.2rem;
+  padding: 2.4rem 2.2rem;
   grid-column: 3 / span 2;
 
   & > *:first-child {
+    /*  first direct child element within a component */
     margin-bottom: 1.6rem;
   }
 
   & .recharts-pie-label-text {
     font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    height: 420px;
+    padding: 2.4rem 0.5rem;
+
+    div div .recharts-legend-wrapper {
+      top: 250px !important;
+      font-size: 1.5rem;
+      left: 39%;
+      width: 50% !important;
+    }
   }
 `;
 
@@ -116,8 +130,9 @@ const startDataDark = [
 
 function prepareData(startData, stays) {
   function incArrayValue(arr, field) {
-    return arr.map((obj) =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
+    return arr.map(
+      (obj) => (obj.duration === field ? { ...obj, value: obj.value + 1 } : obj)
+      //  increment the value property of objects within an array (arr) based on a specified field condition
     );
   }
 
@@ -143,6 +158,18 @@ function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
+  const [isSmallerThan600px, setIsSmallerThan600px] = useState(
+    window.matchMedia("(max-width: 600px)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 600px)");
+    const handler = (e) => setIsSmallerThan600px(e.matches);
+    mediaQuery.addListener(handler);
+    return () => mediaQuery.removeListener(handler);
+  }, []);
+
+  const cxValue = isSmallerThan600px ? "105%" : "40%";
 
   return (
     <ChartBox>
@@ -153,9 +180,9 @@ function DurationChart({ confirmedStays }) {
             data={data}
             nameKey="duration"
             dataKey="value"
-            innerRadius={85}
-            outerRadius={110}
-            cx="40%"
+            innerRadius={75}
+            outerRadius={94}
+            cx={cxValue}
             cy="50%"
             paddingAngle={3}
           >
